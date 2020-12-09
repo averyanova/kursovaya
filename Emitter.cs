@@ -8,7 +8,7 @@ using System.Drawing;
 namespace курсовая_по_тп
 {
     public class Emitter
-    {
+    {//
         List<Particle> particles = new List<Particle>();
         public List<IImpactPoint> impactPoints = new List<IImpactPoint>();
         public int X;
