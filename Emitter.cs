@@ -8,7 +8,7 @@ using System.Drawing;
 namespace курсовая_по_тп
 {
     public class Emitter
-    {//
+    {
         List<Particle> particles = new List<Particle>();
         public List<IImpactPoint> impactPoints = new List<IImpactPoint>();
         public int X;
@@ -21,11 +21,13 @@ namespace курсовая_по_тп
         public int RadiusMax = 10;
         public int LifeMin = 20;
         public int LifeMax = 100;
-        public int ParticleesPerTick = 20;
+        public int ParticleesPerTick = 1;
         public Color ColorFrom = Color.Aquamarine;
-        public Color ColorTo = Color.FromArgb(0, Color.Black);
+        public Color ColorTo = Color.FromArgb(0, Color.White);
         public float GravitationX = 0;
         public float GravitationY = 0;
+        public int MousePositionX;
+        public int MousePositionY;
 
         public virtual Particle CreateParticle()
         {
@@ -134,7 +136,7 @@ namespace курсовая_по_тп
 
     public class GravityPoint : IImpactPoint
     {
-        public int Power = 1;
+        public int Power = 20;
         public int count = 0;
 
         public override void ImpactParticle(Particle particle)

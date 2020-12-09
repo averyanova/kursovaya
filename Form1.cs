@@ -38,13 +38,13 @@ namespace курсовая_по_тп
                 GravitationY = 0.25f
             };
 
-            Emitter.impactPoints.Add(new GravityPoint {
-                X = pictureBox.Width / 2 + 100,
-                Y = pictureBox.Height / 2});
+            //Emitter.impactPoints.Add(new GravityPoint {
+            //    X = pictureBox.Width / 2 + 100,
+            //    Y = pictureBox.Height / 2});
 
-            Emitter.impactPoints.Add(new GravityPoint {
-               X = pictureBox.Width / 2 - 100,
-               Y = pictureBox.Height / 2});
+            //Emitter.impactPoints.Add(new GravityPoint {
+            //   X = pictureBox.Width / 2 - 100,
+            //   Y = pictureBox.Height / 2});
 
             //Emitter.impactPoints.Add(new GravityPoint {
             //    X = (float)(pictureBox.Width * 0.25),
@@ -87,18 +87,32 @@ namespace курсовая_по_тп
 
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-
+            if (e.Button == MouseButtons.Left)
+            {
+                Emitter.impactPoints.Add(new GravityPoint
+                {
+                    X = e.X,
+                    Y = e.Y,
+                }) ;
+            }
         }
 
         private void TrackBar2_Scroll(object sender, EventArgs e)
         {
-            foreach (var p in Emitter.particles)
-            {
-                if (p is Emitter)
-                {
-                    (p as UpdateState).ParticleesPerTick = trackBar1.Value;
-                }
-            }
+            Emitter.ParticleesPerTick = trackBar2.Value;
+            trackBar2.Value = trackBar2.Value;
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            Emitter.GravitationX = 0;
+            Emitter.GravitationY = 0;
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            Emitter.GravitationX = 0;
+            Emitter.GravitationY = 1;
         }
     }
 }
