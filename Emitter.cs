@@ -138,6 +138,7 @@ namespace курсовая_по_тп
     {
         public int Power = 20;
         public int count;
+        public int b = 20;
 
         public override void ImpactParticle(Particle particle)
         {
@@ -159,21 +160,34 @@ namespace курсовая_по_тп
                 //        count++;
                 //    }
                 //}
+                
+                
             }
         }
         public override void Render(Graphics g)
         {
+            
+            
+            int alpha = b + 20;
+            var color = Color.FromArgb(alpha, Color.Red);
             g.DrawEllipse(
-                new Pen(Color.Red),
+                new Pen(Color.White),
                 X - Power / 2,
                 Y - Power / 2,
                 Power,
                 Power);
+            g.FillEllipse(
+                new SolidBrush(color),
+                X - Power / 2,
+                Y - Power / 2,
+                Power,
+                Power
+                );
 
             g.DrawString($"{count}",
                 new Font("Verdana", 10),
                 new SolidBrush(Color.White),
-                X - 25,
+                X - 15,
                 Y - 5);
         }
     }

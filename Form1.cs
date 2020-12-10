@@ -82,8 +82,11 @@ namespace курсовая_по_тп
                 if (p is GravityPoint)
                 {
                     (p as GravityPoint).Power = trackBar1.Value;
+                    (p as GravityPoint).b = trackBar1.Value;
+
                 }
             }
+            label5.Text = $"{trackBar1.Value}";
         }
 
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
@@ -95,7 +98,8 @@ namespace курсовая_по_тп
                     X = e.X,
                     Y = e.Y,
                     Power = trackBar1.Value,
-                }) ;
+                    b = trackBar1.Value,
+            }) ;
             }
         }
 
@@ -103,6 +107,7 @@ namespace курсовая_по_тп
         {
             Emitter.ParticleesPerTick = trackBar2.Value;
             trackBar2.Value = trackBar2.Value;
+            label6.Text = $"{trackBar2.Value}";
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -115,6 +120,41 @@ namespace курсовая_по_тп
         {
             Emitter.GravitationX = 0;
             Emitter.GravitationY = 1;
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            Emitter.ColorFrom = Color.Red;
+        }
+
+        private void Button4_Click(object sender, EventArgs e)
+        {
+            Emitter.ColorFrom = Color.Blue;
+        }
+
+        private void Button5_Click(object sender, EventArgs e)
+        {
+            Emitter.ColorFrom = Color.Yellow;
+        }
+
+        private void Button6_Click(object sender, EventArgs e)
+        {
+            Emitter.ColorFrom = Color.Pink;
+        }
+
+        private void Button7_Click(object sender, EventArgs e)
+        {
+            Emitter.ColorFrom = Color.Green;
+        }
+
+        private void Button8_Click(object sender, EventArgs e)
+        {
+            Emitter.ColorFrom = Color.Brown;
+        }
+
+        private void Button9_Click(object sender, EventArgs e)
+        {
+            Emitter.ColorFrom = Color.Purple;
         }
     }
 }
