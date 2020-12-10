@@ -137,7 +137,7 @@ namespace курсовая_по_тп
     public class GravityPoint : IImpactPoint
     {
         public int Power = 20;
-        public int count = 0;
+        public int count;
 
         public override void ImpactParticle(Particle particle)
         {
@@ -148,6 +148,17 @@ namespace курсовая_по_тп
             {
                 particle.life = 0;
                 count++;
+                //while (count < 15001)
+                //{
+                //    if(count == 15000)
+                //    {
+                //        count = 0;
+                //    }
+                //    else
+                //    {
+                //        count++;
+                //    }
+                //}
             }
         }
         public override void Render(Graphics g)

@@ -94,6 +94,7 @@ namespace курсовая_по_тп
                 {
                     X = e.X,
                     Y = e.Y,
+                    Power = trackBar1.Value,
                 }) ;
             }
         }
