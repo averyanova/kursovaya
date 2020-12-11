@@ -42,7 +42,7 @@ namespace курсовая_по_тп
             int particlesToCreate = ParticleesPerTick;
             foreach (var particle in particles)
             {
-                if (particle.life < 0)
+                if (particle.life <= 0)
                 {
                     if (particlesToCreate > 0)
                     {
@@ -88,7 +88,6 @@ namespace курсовая_по_тп
                 point.Render(g);
             }
         }
-        public int ParticlesCount = 500;
         public virtual void ResetParticle(Particle particle)
         {
             particle.life = Particle.rnd.Next(LifeMin, LifeMax);
@@ -142,33 +141,25 @@ namespace курсовая_по_тп
 
         public override void ImpactParticle(Particle particle)
         {
-            float gX = X - particle.x;
-            float gY = Y - particle.y;
-            double r = Math.Sqrt(gX * gX + gY * gY);
-            if (r + particle.radius < Power / 2)
+            if (count < 15000)
             {
-                particle.life = 0;
-                count++;
-                //while (count < 15001)
-                //{
-                //    if(count == 15000)
-                //    {
-                //        count = 0;
-                //    }
-                //    else
-                //    {
-                //        count++;
-                //    }
-                //}
-                
-                
+                float gX = X - particle.x;
+                float gY = Y - particle.y;
+                double r = Math.Sqrt(gX * gX + gY * gY);
+                if (r + particle.radius < Power / 1.6 && particle.life != 0)
+                {
+                    particle.life = 0;
+                    count++;
+                }
+            }
+            else
+            {
+                count = 0;
             }
         }
         public override void Render(Graphics g)
         {
-            
-            
-            int alpha = b + 20;
+            int alpha = Power + 20;
             var color = Color.FromArgb(alpha, Color.Red);
             g.DrawEllipse(
                 new Pen(Color.White),
@@ -176,6 +167,7 @@ namespace курсовая_по_тп
                 Y - Power / 2,
                 Power,
                 Power);
+
             g.FillEllipse(
                 new SolidBrush(color),
                 X - Power / 2,
@@ -184,11 +176,15 @@ namespace курсовая_по_тп
                 Power
                 );
 
+            var stringFormat = new StringFormat();
+            stringFormat.Alignment = StringAlignment.Center;
+            stringFormat.LineAlignment = StringAlignment.Center;
             g.DrawString($"{count}",
                 new Font("Verdana", 10),
                 new SolidBrush(Color.White),
-                X - 15,
-                Y - 5);
+                X,
+                Y,
+                stringFormat);
         }
     }
 

@@ -27,8 +27,6 @@ namespace курсовая_по_тп
             b.Dispose();
         }
 
-        
-
         public Particle()
         {
             var direction = rnd.Next(360);

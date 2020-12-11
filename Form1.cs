@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Linq;
 
 namespace курсовая_по_тп
 {
@@ -19,37 +18,11 @@ namespace курсовая_по_тп
         {
             InitializeComponent();
             pictureBox.Image = new Bitmap(pictureBox.Width, pictureBox.Height);
-            this.Emitter = new Emitter
-            {
-                Direction = 0,
-                Spreading = 10,
-                SpeedMin = 10,
-                SpeedMax = 10,
-                ParticleesPerTick = 20,
-                ColorFrom = Color.Crimson,
-                ColorTo = Color.FromArgb(0, Color.Green),
-                X = pictureBox.Width / 2,
-                Y = pictureBox.Height / 2,
-            };
-            emitters.Add(this.Emitter);
-
             Emitter = new TopEmitter
             {
                 Width = pictureBox.Width,
                 GravitationY = 0.25f
             };
-
-            //Emitter.impactPoints.Add(new GravityPoint {
-            //    X = pictureBox.Width / 2 + 100,
-            //    Y = pictureBox.Height / 2});
-
-            //Emitter.impactPoints.Add(new GravityPoint {
-            //   X = pictureBox.Width / 2 - 100,
-            //   Y = pictureBox.Height / 2});
-
-            //Emitter.impactPoints.Add(new GravityPoint {
-            //    X = (float)(pictureBox.Width * 0.25),
-            //    Y = pictureBox.Height / 2});
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -82,8 +55,6 @@ namespace курсовая_по_тп
                 if (p is GravityPoint)
                 {
                     (p as GravityPoint).Power = trackBar1.Value;
-                    (p as GravityPoint).b = trackBar1.Value;
-
                 }
             }
             label5.Text = $"{trackBar1.Value}";
@@ -98,8 +69,28 @@ namespace курсовая_по_тп
                     X = e.X,
                     Y = e.Y,
                     Power = trackBar1.Value,
-                    b = trackBar1.Value,
-            }) ;
+                }) ;
+            }
+            else
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    foreach (var p in Emitter.impactPoints)
+                    {
+                        if (p is GravityPoint)
+                        {
+                            var a = p as GravityPoint;
+                            var x = a.X - e.X;
+                            var y = a.Y - e.Y;
+                            double r = Math.Sqrt(x * x + y * y);
+                            if (r <= a.Power / 2)
+                            {
+                                Emitter.impactPoints.Remove(p as GravityPoint);
+                                break;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -129,7 +120,7 @@ namespace курсовая_по_тп
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            Emitter.ColorFrom = Color.Blue;
+            Emitter.ColorFrom = Color.SkyBlue;
         }
 
         private void Button5_Click(object sender, EventArgs e)
@@ -139,7 +130,7 @@ namespace курсовая_по_тп
 
         private void Button6_Click(object sender, EventArgs e)
         {
-            Emitter.ColorFrom = Color.Pink;
+            Emitter.ColorFrom = Color.HotPink;
         }
 
         private void Button7_Click(object sender, EventArgs e)
@@ -149,7 +140,7 @@ namespace курсовая_по_тп
 
         private void Button8_Click(object sender, EventArgs e)
         {
-            Emitter.ColorFrom = Color.Brown;
+            Emitter.ColorFrom = Color.SaddleBrown;
         }
 
         private void Button9_Click(object sender, EventArgs e)
